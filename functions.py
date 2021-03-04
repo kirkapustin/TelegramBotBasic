@@ -14,13 +14,19 @@ def send_request(method, headers=None, params=None):
     request = get(url, headers=headers, params=params)
 
     if request.status_code != 200:
-        bad_outcome_request_log(request)
+        request_info = {
+            'method': method,
+            'headers': headers,
+            'request_params': params
+        }
+        bad_outcome_request_log(request, request_info)
 
 
-def bad_outcome_request_log(data):
+def bad_outcome_request_log(response_info, request_info ):
     """логируем ошибки при отправке запросов"""
     error = f"{datetime.now()} - " \
-            f"code: {data.status_code}; error_text: <{data.text}>"
+            f"code: {response_info.status_code}; error_text: <{response_info.text}>;" \
+            f"request data: {request_info}"
     with open('bad_outcome_request.log', 'a', encoding='utf-8') as file:
         file.write(error + '\n')
 
