@@ -1,1 +1,4 @@
-# TelegramBotBasic
+# Telegram Bot Basic
+
+## Переменные окружения
+Токен бота не указывается в коде, а задается в переменной окружения TELEGRAM_BOT_TOKEN
